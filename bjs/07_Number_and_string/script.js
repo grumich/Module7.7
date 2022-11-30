@@ -38,6 +38,28 @@ document.getElementById('btn_sum').addEventListener('click', function () {
     operation = 'sum';
     inputWindow.value = '';
 })
+document.getElementById('btn_min').addEventListener('click', function () {
+    lastOperand = parseInt(inputWindow.value);
+    operation = 'min';
+    inputWindow.value = '';
+})
+document.getElementById('btn_mult').addEventListener('click', function () {
+    lastOperand = parseInt(inputWindow.value);
+    operation = 'mult';
+    inputWindow.value = '';
+})
+document.getElementById('btn_dev').addEventListener('click', function () {
+    lastOperand = parseInt(inputWindow.value);
+    operation = 'dev';
+    inputWindow.value = '';
+})
+document.getElementById('btn_sqv').addEventListener('click', function () {
+    const result = Math.sqrt(parseInt(inputWindow.value));
+    operation = null;
+    lastOperand = 0;
+    console.log(result);
+    inputWindow.value = result;
+})
 document.getElementById('btn_calc').addEventListener('click', function () {
     if (operation==='sum'){
         const result = lastOperand + parseInt(inputWindow.value);
@@ -45,7 +67,24 @@ document.getElementById('btn_calc').addEventListener('click', function () {
                 lastOperand = 0;
                 inputWindow.value = result;
     }
-    
+    if (operation==='min'){
+        const result = lastOperand - parseInt(inputWindow.value);
+                operation = null;
+                lastOperand = 0;
+                inputWindow.value = result;
+    }
+    if (operation==='mult'){
+        const result = lastOperand * parseInt(inputWindow.value);
+                operation = null;
+                lastOperand = 0;
+                inputWindow.value = result;
+    }
+    if (operation==='dev'){
+        const result = lastOperand / parseInt(inputWindow.value);
+                operation = null;
+                lastOperand = 0;
+                inputWindow.value = result;
+    }
 })
 
 
