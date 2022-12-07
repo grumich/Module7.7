@@ -158,7 +158,7 @@ document.querySelector('#btnEqual').addEventListener('click', function () {
                     break;
 
                 case 2:
-                    answerPhrase = `Отлично!\n\u{1F973}`
+                    answerPhrase = `Да это легко! Ты загадал\n\u{1F973}`
                     break;
 
                 case 3:
