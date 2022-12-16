@@ -1,0 +1,20 @@
+.card-header {
+   background: #ffe08487;
+}
+.card-footer{
+   background: #8bc8f7ad;
+}
+.card-body{
+background:#ffffff;
+}
+
+body{
+   background:ghostwhite;
+   background-image:url(https://ecommserbia.org/wp-content/uploads/2019/02/information-technology-concept-on-computer-display-with-animated-dots-and-lines-of-molecule-on-blue-background-4k-video_rcnei4lj_thumbnail-full01-1024x576.png);
+background-size:cover;
+   background-repeat:no-repeat;
+}
+.container{
+   margin:0px auto;
+   margin-top:15%;
+}
