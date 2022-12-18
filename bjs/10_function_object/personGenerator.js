@@ -1,6 +1,6 @@
 const mon = Math.floor(Math.random() * 3); // случайное число для генерации месяца
 const personGenerator = {
-    surnameJson: `{  
+  surnameJson: `{  
         "count": 15,
         "list": {
             "id_1": "Иванов",
@@ -21,7 +21,7 @@ const personGenerator = {
             "id_16": "Морозов"
         }
     }`,
-    firstNameMaleJson: `{
+  firstNameMaleJson: `{
         "count": 10,
         "list": {     
             "id_1": "Александр",
@@ -32,12 +32,12 @@ const personGenerator = {
             "id_6": "Никита",
             "id_7": "Михаил",
             "id_8": "Даниил",
-            "id_9": "Егор",
+            "id_9": "Антон",
             "id_10": "Андрей"
         }
     }`,
 
-    firstNameFemalelJson:`{
+  firstNameFemalelJson: `{
         "count":10,
         "list":{
         "id_1": "Мария",
@@ -50,28 +50,26 @@ const personGenerator = {
         "id_8": "Ксения",
         "id_9": "Вероника",
         "id_10": "Алла"
-        
-        }
+       }
     }`,
-    
-      patronymicJson:`{
+
+  patronymicJson: `{
         "count":10,
         "list":{
-           "id_1": "Владимиров",
-           "id_2": "Алексеев",
-           "id_3": "Сергеев",
-           "id_4": "Петров",
-           "id_5": "Андреев",
-           "id_6": "Михайлов",
-           "id_7": "Иванов",
-           "id_8": "Александров",
-           "id_9": "Анатольев",
-           "id_10": "Петров"
-        
+            "id_1": "Александр",
+            "id_2": "Максим",
+            "id_3": "Иван",
+            "id_4": "Артем",
+            "id_5": "Дмитрий",
+            "id_6": "Никита",
+            "id_7": "Михаил",
+            "id_8": "Даниил",
+            "id_9": "Антон",
+            "id_10": "Андрей"
         }
     }`,
 
-       professionMaleJson:`{
+  professionMaleJson: `{
         "count":10,
         "list":{
         "id_1": "Шахтер",
@@ -84,11 +82,10 @@ const personGenerator = {
         "id_8": "Крановщик",
         "id_9": "Охраник",
         "id_10": "Полицейский"
-        
         }
     }`,
 
-        professionFemaleJson:`{
+  professionFemaleJson: `{
         "count":10,
         "list":{
         "id_1": "Танцовщица",
@@ -101,110 +98,129 @@ const personGenerator = {
         "id_8": "Медсестра",
         "id_9": "Швея",
         "id_10": "Переводчица"
-        
         }
     }`,
 
-    
+  GENDER_MALE: "Мужчина",
+  GENDER_FEMALE: "Женщина",
 
-    GENDER_MALE: 'Мужчина',
-    GENDER_FEMALE: 'Женщина',
+  // генерация пола
+  randomGender: function () {
+    return Math.floor(Math.random() * 2) == 1
+      ? this.GENDER_MALE
+      : this.GENDER_FEMALE;
+  },
 
-// генерация пола
-    randomGender: function() {
-    return Math.floor(Math.random()*2) == 1 ? this.GENDER_MALE : this.GENDER_FEMALE;
-    },
-   
+  randomIntNumber: (max = 1, min = 0) =>
+    Math.floor(Math.random() * (max - min + 1) + min),
 
-    randomIntNumber: (max = 1, min = 0) => Math.floor(Math.random() * (max - min + 1) + min),
-   
-    randomValue: function (json) {
-        const obj = JSON.parse(json);
-        const prop = `id_${this.randomIntNumber(obj.count, 1)}`;  // this = personGenerator
-        return obj.list[prop];
-    },
-// генерация имени
-    randomFirstName: function() {
-    if(this.person.gender=='Мужчина'){
-         return this.randomValue(this.firstNameMaleJson);
+  randomValue: function (json) {
+    const obj = JSON.parse(json);
+    const prop = `id_${this.randomIntNumber(obj.count, 1)}`; // this = personGenerator
+    return obj.list[prop];
+  },
+  // генерация имени
+  randomFirstName: function () {
+    if (this.person.gender == "Мужчина") {
+      return this.randomValue(this.firstNameMaleJson);
+    } else {
+      return this.randomValue(this.firstNameFemalelJson);
     }
-    else{
-        return this.randomValue(this.firstNameFemalelJson);
+  },
+  //генерация фамилии
+  randomSurname: function () {
+    if (this.person.gender == "Мужчина") {
+      return this.randomValue(this.surnameJson);
+    } else {
+      return this.randomValue(this.surnameJson) + "а";
     }
-    },
-//генерация фамилии
-     randomSurname: function() {
-     if(this.person.gender=='Мужчина'){
-        return this.randomValue(this.surnameJson);
+  },
+  //генерация отчества
+  randomPatronymic: function () {
+    if (this.person.gender == "Мужчина") {
+        let patroname=this.randomValue(this.patronymicJson);
+      if (patroname == "Александр" || patroname =="Максим" || patroname == "Иван" ||  patroname =="Артем" || patroname == "Михаил" || patroname == "Даниил" || patroname =="Антон") {
+        return patroname + "ович";
+      } else if (patroname == "Андрей") {
+        return "Андреевич";
+      } else if (patroname == "Дмитрий") {
+        return "Дмитриевич";}
+      else if (patroname =="Никита") {
+        return "Никитич";
+      }
+    } 
+    else {let patroname=this.randomValue(this.patronymicJson);
+      if (patroname == "Александр" || patroname =="Максим" || patroname == "Иван" ||  patroname =="Артем" || patroname == "Михаил" || patroname == "Даниил" || patroname =="Антон") {
+        return patroname + "овна";
+      } else if (patroname ==  "Андрей") {
+        return  "Андреевна";
+      } else if (patroname == "Дмитрий") {
+        return "Дмитреевна";
+      } 
+      else {return "Никитична";}
     }
-    else{
-        return this.randomValue(this.surnameJson) + "а";
-    }
-    },
-//генерация отчества
-    randomPatronymic: function() {
-     if(this.person.gender=='Мужчина'){
-        return this.randomValue(this.patronymicJson) +"ич";
-    }
-    else{
-        return this.randomValue(this.patronymicJson) + "на";
-    }
-    },
-//генерация года рождения
-    randomYearOfBirthday: function (){
-        return this.randomIntNumber(1980, 2001) +" г.р.";
-    },
+  },
+  //генерация года рождения
+  randomYearOfBirthday: function () {
+    return this.randomIntNumber(1980, 2001) + " г.р.";
+  },
 
-//генерация профессии
- randomProfession: function() {
-     if(this.person.gender=='Мужчина'){
-        return this.randomValue(this.professionMaleJson);
+  //генерация профессии
+  randomProfession: function () {
+    if (this.person.gender == "Мужчина") {
+      return this.randomValue(this.professionMaleJson);
+    } else {
+      return this.randomValue(this.professionFemaleJson);
     }
-    else{
-        return this.randomValue(this.professionFemaleJson);
+  },
+
+  //генерация месяцев
+  randomMonth31: function randomMonth() {
+    // Функция генерации месяцев, в которых 31 день
+    let months = [
+      `января`,
+      `марта`,
+      `мая`,
+      `июля`,
+      `августа`,
+      `октября`,
+      `декабря`,
+    ];
+    let month = months[Math.floor(Math.random() * 7)];
+    return month;
+  },
+
+  randomMonth30: function randomMonth() {
+    // Функция генерации месяцев, в которых 30 дней
+    let months = [`апреля`, `июня`, `сентября`, `ноября`];
+    let month = months[Math.floor(Math.random() * 4)];
+    return month;
+  },
+
+  randomMonthFeb28: function randomMonth() {
+    // Функция генерации месяца Февраль
+    let month = `февраля`;
+    return month;
+  },
+
+  getPerson: function () {
+    this.person = {};
+    this.person.gender = this.randomGender();
+    this.person.firstName = this.randomFirstName();
+    this.person.surName = this.randomSurname();
+    this.person.patroNymic = this.randomPatronymic();
+    this.person.yearOfBirthday = this.randomYearOfBirthday();
+    this.person.profession = this.randomProfession();
+    if (mon === 0) {
+      this.person.month = this.randomMonth31();
+      this.person.day = this.randomIntNumber(1, 31); // Генерация чисел в месяцах, в которых 31 день
+    } else if (mon === 1) {
+      this.person.month = this.randomMonth30();
+      this.person.day = this.randomIntNumber(1, 30); // Генерация чисел в месяцах, в которых 30 деней
+    } else if (mon === 2) {
+      this.person.month = this.randomMonthFeb28();
+      this.person.day = this.randomIntNumber(1, 28); // Генерация чисел в месяце Февраль, в котором 28 дней
     }
-    },
-
-//генерация месяцев
-  randomMonth31: function randomMonth() { // Функция генерации месяцев, в которых 31 день
-        let months = [`января`, `марта`, `мая`,	`июля`,	`августа`, `октября`, `декабря`];
-        let month = months[Math.floor(Math.random() * 7)];
-        return month;
-    },
-    
-    randomMonth30: function randomMonth() { // Функция генерации месяцев, в которых 30 дней
-        let months = [`апреля`, `июня`, `сентября`, `ноября`];
-        let month = months[Math.floor(Math.random() * 4)];
-        return month;
-    },
-
-    randomMonthFeb28: function randomMonth() { // Функция генерации месяца Февраль
-		let month = `февраля`
-		return month;
-	},
-    
-    
-
-    getPerson: function () {
-        this.person = {};
-        this.person.gender = this.randomGender();
-        this.person.firstName = this.randomFirstName();
-        this.person.surName = this.randomSurname();
-        this.person.patroNymic = this.randomPatronymic();
-        this.person.yearOfBirthday = this.randomYearOfBirthday();
-    	this.person.profession = this.randomProfession();
-        if (mon === 0) {
-        this.person.month = this.randomMonth31();
-        this.person.day = this.randomIntNumber(1, 31); // Генерация чисел в месяцах, в которых 31 день
-        } 
-        else if (mon === 1) {
-            this.person.month = this.randomMonth30();
-            this.person.day = this.randomIntNumber(1, 30); // Генерация чисел в месяцах, в которых 30 деней
-        } 
-        else if (mon === 2) {
-            this.person.month = this.randomMonthFeb28();
-            this.person.day = this.randomIntNumber(1, 28); // Генерация чисел в месяце Февраль, в котором 28 дней
-        }
-        return this.person;
-    }
+    return this.person;
+  },
 };
