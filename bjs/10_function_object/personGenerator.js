@@ -57,16 +57,16 @@ const personGenerator = {
       patronymicJson:`{
         "count":10,
         "list":{
-        "id_1": "Александро",
-        "id_2": "Максимо",
-        "id_3": "Ивано",
-        "id_4": "Артемо",
-        "id_5": "Дмитрие",
-        "id_6": "Евгенье",
-        "id_7": "Даниило",
-        "id_8": "Андрее",
-        "id_9": "Михайло",
-        "id_10": "Генадье"
+           "id_1": "Владимиров",
+           "id_2": "Алексеев",
+           "id_3": "Сергеев",
+           "id_4": "Петров",
+           "id_5": "Андреев",
+           "id_6": "Михайлов",
+           "id_7": "Иванов",
+           "id_8": "Александров",
+           "id_9": "Анатольев",
+           "id_10": "Петров"
         
         }
     }`,
@@ -144,10 +144,10 @@ const personGenerator = {
 //генерация отчества
     randomPatronymic: function() {
      if(this.person.gender=='Мужчина'){
-        return this.randomValue(this.patronymicJson) +"вич";
+        return this.randomValue(this.patronymicJson) +"ич";
     }
     else{
-        return this.randomValue(this.patronymicJson) + "вна";
+        return this.randomValue(this.patronymicJson) + "на";
     }
     },
 //генерация года рождения
